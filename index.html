@@ -973,43 +973,54 @@
     }
 
     function renderCartItems() {
-      const el = document.getElementById('cart-items');
-      const footer = document.getElementById('cart-footer');
-      const empty = document.getElementById('cart-empty');
+  const el = document.getElementById('cart-items');
+  const footer = document.getElementById('cart-footer');
+  const empty = document.getElementById('cart-empty');
 
-      if (!cart.length) {
-        el.innerHTML = '';
-        el.appendChild(empty);
-        empty.style.display = '';
-        footer.style.display = 'none';
-        return;
-      }
+  if (!cart.length) {
+    empty.style.display = '';
+    footer.style.display = 'none';
+    el.querySelectorAll('.cart-item').forEach(n => n.remove());
+    return;
+  }
 
-      empty.style.display = 'none';
-      footer.style.display = '';
+  empty.style.display = 'none';
+  footer.style.display = '';
 
-      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-      document.getElementById('cart-total').textContent = '₦' + subtotal.toLocaleString();
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cart-total').textContent = '₦' + subtotal.toLocaleString();
 
-      el.innerHTML = cart.map(item => `
-        <div class="cart-item">
-          <div class="cart-item-img">${item.image ? `<img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover"/>` : item.emoji}</div>
-          <div class="cart-item-info">
-            <p class="cart-item-brand">${item.brand}</p>
-            <p class="cart-item-name">${item.name}</p>
-            <p class="cart-item-size">${item.size}</p>
-            <div class="cart-item-bottom">
-              <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
-                <span class="qty-num">${item.qty}</span>
-                <button class="qty-btn" onclick="changeQty(${item.id}, +1)">+</button>
-              </div>
-              <span class="cart-item-price">₦${(item.price * item.qty).toLocaleString()}</span>
-            </div>
-            <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+  el.querySelectorAll('.cart-item').forEach(n => n.remove());
+
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <div class="cart-item-img">${item.image 
+        ? `<img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover"/>` 
+        : item.emoji}</div>
+      <div class="cart-item-info">
+        <p class="cart-item-brand">${item.brand}</p>
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-size">${item.size}</p>
+        <div class="cart-item-bottom">
+          <div class="qty-control">
+            <button class="qty-btn qty-minus">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn qty-plus">+</button>
           </div>
-        </div>`).join('');
-    }
+          <span class="cart-item-price">₦${(item.price * item.qty).toLocaleString()}</span>
+        </div>
+        <button class="remove-btn">Remove</button>
+      </div>`;
+
+    div.querySelector('.qty-minus').addEventListener('click', () => changeQty(item.id, -1));
+    div.querySelector('.qty-plus').addEventListener('click', () => changeQty(item.id, +1));
+    div.querySelector('.remove-btn').addEventListener('click', () => removeFromCart(item.id));
+
+    el.appendChild(div);
+  });
+}
 
     function openCart() {
       renderCartItems();
