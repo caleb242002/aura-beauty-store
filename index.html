@@ -652,7 +652,7 @@
   <section>
     <div class="hero">
       <div class="hero-left">
-        <p class="hero-eyebrow">New Collection — 2025</p>
+        <p class="hero-eyebrow">New Collection — 2026</p>
         <h1 class="hero-title">Skin that<br><em>glows</em><br>naturally.</h1>
         <p class="hero-desc">Clean, conscious beauty formulated with the finest botanical ingredients. No compromise — for your skin or the planet.</p>
         <div class="hero-actions">
@@ -661,13 +661,12 @@
         </div>
       </div>
       <div class="hero-right">
-        <div class="hero-blob">✦</div>
-        <div class="hero-badge">
-          <strong>100%</strong>
-          <span>Clean ingredients</span>
-        </div>
-      </div>
-    </div>
+  <img src="./kadarius-seegars-Mxy5gokl8mE-unsplash.jpg" alt="Hero Image" class="hero-blob" />
+  <div class="hero-badge">
+    <strong>100%</strong>
+    <span>Clean ingredients</span>
+  </div>
+</div>
   </section>
 
   <!-- TICKER -->
@@ -833,21 +832,23 @@
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
+  
+
   <script>
     // ── PRODUCTS DATA ──────────────────────────────────────────────
     const products = [
-      { id:1,  name:'Gentle Foam Cleanser',        brand:'Aura',     category:'cleanser',    price:12500, size:'150ml', emoji:'🫧', badge:'bestseller', stars:5,   rating:4.8, image:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80' },
-      { id:2,  name:'Vitamin C Brightening Serum', brand:'Aura',     category:'serum',       price:28000, size:'30ml',  emoji:'✨', badge:'new',        stars:5,   rating:4.9, image:'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80' },
-      { id:3,  name:'Hydra-Barrier Moisturiser',   brand:'Aura',     category:'moisturiser', price:22000, size:'50ml',  emoji:'💧', badge:null,         stars:4,   rating:4.6, image:'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?w=600&q=80' },
-      { id:4,  name:'Rose Hip Facial Oil',         brand:'Aura',     category:'oil',         price:18500, size:'30ml',  emoji:'🌹', badge:'bestseller', stars:5,   rating:4.7, image:'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&q=80' },
-      { id:5,  name:'Kaolin Clay Purifying Mask',  brand:'Aura',     category:'mask',        price:15000, size:'75ml',  emoji:'🪔', badge:null,         stars:4,   rating:4.5, image:'https://images.unsplash.com/photo-1591375372226-3c5b99c11834?w=600&q=80' },
-      { id:6,  name:'Mineral SPF 50 Sunscreen',    brand:'Aura',     category:'spf',         price:16500, size:'60ml',  emoji:'☀️', badge:'new',        stars:5,   rating:4.9, image:'https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=600&q=80' },
-      { id:7,  name:'Niacinamide 10% Serum',       brand:'Aura',     category:'serum',       price:24000, size:'30ml',  emoji:'⚗️', badge:null,         stars:4,   rating:4.6, image:'https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=600&q=80' },
-      { id:8,  name:'Ceramide Repair Moisturiser', brand:'Aura',     category:'moisturiser', price:26500, originalPrice:32000, size:'50ml', emoji:'🌿', badge:'sale', stars:5, rating:4.8, image:'https://images.unsplash.com/photo-1601049676869-702ea24cfd58?w=600&q=80' },
-      { id:9,  name:'Oil Balancing Toner',         brand:'Aura',     category:'cleanser',    price:13500, size:'200ml', emoji:'💎', badge:null,         stars:4,   rating:4.4, image:'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80' },
-      { id:10, name:'Bakuchiol Retinol Serum',     brand:'Aura',     category:'serum',       price:31000, size:'30ml',  emoji:'🌙', badge:'new',        stars:5,   rating:4.9, image:'https://images.unsplash.com/photo-1617897903246-719242758050?w=600&q=80' },
-      { id:11, name:'Avocado Nourishing Mask',     brand:'Aura',     category:'mask',        price:14000, size:'75ml',  emoji:'🥑', badge:null,         stars:4,   rating:4.3, image:'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80' },
-      { id:12, name:'Squalane Face Oil',           brand:'Aura',     category:'oil',         price:19500, size:'30ml',  emoji:'🫙', badge:'bestseller', stars:5,   rating:4.7, image:'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80' },
+      { id:1,  name:'Gentle Foam Cleanser',        brand:'Aura',     category:'cleanser',    price:12500, size:'150ml', emoji:'🫧', badge:'bestseller', stars:5,   rating:4.8, image:"./curology-wK0h-mlvfuc-unsplash.jpg" },
+      { id:2,  name:'Vitamin C Brightening Serum', brand:'Aura',     category:'serum',       price:28000, size:'30ml',  emoji:'✨', badge:'new',        stars:5,   rating:4.9, image: "./enecta-cannabis-extracts-80wCkpt-IKE-unsplash.jpg"},
+      { id:3,  name:'Hydra-Barrier Moisturiser',   brand:'Aura',     category:'moisturiser', price:22000, size:'50ml',  emoji:'💧', badge:null,         stars:4,   rating:4.6, image: "./kalos-skincare-kzjH8CCWAD0-unsplash.jpg"},
+      { id:4,  name:'Rose Hip Facial Oil',         brand:'Aura',     category:'oil',         price:18500, size:'30ml',  emoji:'🌹', badge:'bestseller', stars:5,   rating:4.7, image: "./laura-jaeger-eKxQCPw3dyc-unsplash.jpg"},
+      { id:5,  name:'Kaolin Clay Purifying Mask',  brand:'Aura',     category:'mask',        price:15000, size:'75ml',  emoji:'🪔', badge:null,         stars:4,   rating:4.5, image: "./valeriia-miller-_42NKYROG7g-unsplash.jpg"},
+      { id:6,  name:'Mineral SPF 50 Sunscreen',    brand:'Aura',     category:'spf',         price:16500, size:'60ml',  emoji:'☀️', badge:'new',        stars:5,   rating:4.9, image: "./blobimg1.jpg"},
+      { id:7,  name:'Niacinamide 10% Serum',       brand:'Aura',     category:'serum',       price:24000, size:'30ml',  emoji:'⚗️', badge:null,         stars:4,   rating:4.6, image: "./rafly-alfaridzy-D44p6Ubx-9E-unsplash.jpg"},
+      { id:8,  name:'Ceramide Repair Moisturiser', brand:'Aura',     category:'moisturiser', price:26500, originalPrice:32000, size:'50ml', emoji:'🌿', badge:'sale', stars:5, rating:4.8, image: "./globencer-DiJKOYIiNmQ-unsplash.jpg"},
+      { id:9,  name:'Oil Balancing Toner',         brand:'Aura',     category:'cleanser',    price:13500, size:'200ml', emoji:'💎', badge:null,         stars:4,   rating:4.4, image: "./laura-jaeger-_dSHqe4mcWE-unsplash.jpg"},
+      { id:10, name:'Bakuchiol Retinol Serum',     brand:'Aura',     category:'serum',       price:31000, size:'30ml',  emoji:'🌙', badge:'new',        stars:5,   rating:4.9, image: "./marisa-garrido-8cN2BYlzuyI-unsplash.jpg"},
+      { id:11, name:'Avocado Nourishing Mask',     brand:'Aura',     category:'mask',        price:14000, size:'75ml',  emoji:'🥑', badge:null,         stars:4,   rating:4.3, image: "./birgith-roosipuu-4uN0JxJGRQE-unsplash.jpg"},
+      { id:12, name:'Squalane Face Oil',           brand:'Aura',     category:'oil',         price:19500, size:'30ml',  emoji:'🫙', badge:'bestseller', stars:5,   rating:4.7, image: "./janay-peters-TYwZ5tgKjYQ-unsplash.jpg"},
     ];
 
     let cart = JSON.parse(localStorage.getItem('aura-cart') || '[]');
