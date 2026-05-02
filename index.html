@@ -611,7 +611,20 @@
     @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
+      .hero-right { 
+        display: flex; 
+        min-height: 280px;
+        overflow: hidden;
+      }
+      .hero-blob {
+        width: 220px;
+        height: 240px;
+        font-size: 5rem;
+      }
+      .hero-badge {
+        bottom: 1rem;
+        left: 1rem;
+      }
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
       .nav-left { display: none; }
       .shop { padding: 3rem 1.5rem; }
@@ -856,7 +869,8 @@
     let currentFilter = 'all';
     let currentSort = 'default';
     let coStep = 1;
-    let discount = 0;
+let discount = 0;
+let searchQuery = '';
 
     // ── RENDER PRODUCTS ────────────────────────────────────────────
     function renderProducts() {
@@ -864,6 +878,7 @@
       let list = [...products];
 
       if (currentFilter !== 'all') list = list.filter(p => p.category === currentFilter);
+if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQuery) || p.category.toLowerCase().includes(searchQuery));
 
       if (currentSort === 'price-asc') list.sort((a,b) => a.price - b.price);
       else if (currentSort === 'price-desc') list.sort((a,b) => b.price - a.price);
@@ -1146,7 +1161,35 @@
     }
 
     // ── SEARCH (simple toggle) ─────────────────────────────────────
-    function toggleSearch() { showToast('Search coming soon ✦'); }
+    function toggleSearch() {
+  const existing = document.getElementById('search-bar');
+  if (existing) { existing.remove(); return; }
+  const bar = document.createElement('div');
+  bar.id = 'search-bar';
+  bar.style.cssText = `
+    position: fixed; top: 57px; left: 0; right: 0; z-index: 199;
+    background: white; border-bottom: 1px solid var(--border);
+    padding: 1rem 2.5rem; display: flex; gap: 1rem; align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  `;
+  bar.innerHTML = `
+    <input id="search-input" type="text" placeholder="Search products e.g. serum, cleanser..."
+      style="flex:1; border:1px solid var(--border); padding:0.7rem 1rem;
+      font-family:'DM Sans',sans-serif; font-size:0.9rem; outline:none;
+      background:var(--cream); color:var(--ink);" />
+    <button onclick="document.getElementById('search-bar').remove(); renderProducts();"
+      style="background:var(--ink); color:var(--cream); border:none;
+      padding:0.7rem 1.5rem; font-size:0.72rem; letter-spacing:0.1em;
+      text-transform:uppercase; cursor:pointer;">Close</button>
+  `;
+  document.body.appendChild(bar);
+  const input = document.getElementById('search-input');
+  input.focus();
+  input.addEventListener('input', function() {
+    searchQuery = this.value.toLowerCase().trim();
+    renderProducts();
+  });
+}
 
     // ── TOAST ──────────────────────────────────────────────────────
     let toastTimer;
