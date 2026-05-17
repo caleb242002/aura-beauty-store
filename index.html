@@ -634,6 +634,7 @@
     }
     @media (max-width: 480px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; } }
   </style>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 <body>
 
@@ -1133,10 +1134,7 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
           `<div class="order-row total"><span>Total</span><span>₦${total.toLocaleString()}</span></div>`;
         coStep = 3;
       } else if (coStep === 3) {
-        // Place order
-       const orderNum = 'AUR-' + Math.floor(100000 + Math.random() * 900000);
-
-        // Save order to Firebase
+        // Get customer details
         const fname = document.getElementById('co-fname').value.trim();
         const lname = document.getElementById('co-lname').value.trim();
         const email = document.getElementById('co-email').value.trim();
@@ -1145,29 +1143,64 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
         const city = document.getElementById('co-city').value.trim();
         const state = document.getElementById('co-state').value.trim();
         const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        const total = subtotal - discount;
 
-        window.saveOrder({
-          orderNumber: orderNum,
-          customer: {
-            name: fname + ' ' + lname,
-            email: email,
-            phone: phone,
-            address: address + ', ' + city + ', ' + state
+        // Close checkout modal first
+        closeCheckout();
+
+        // Launch Paystack
+        const handler = PaystackPop.setup({
+          key: 'pk_test_777ee766c3a86a2c4ff78ac2dd5ae705db5447ac',
+          email: email,
+          amount: total * 100, // Paystack uses kobo (multiply by 100)
+          currency: 'NGN',
+          ref: 'AUR-' + Math.floor(100000 + Math.random() * 900000),
+          metadata: {
+            custom_fields: [
+              { display_name: 'Customer Name', variable_name: 'customer_name', value: fname + ' ' + lname },
+              { display_name: 'Phone', variable_name: 'phone', value: phone },
+              { display_name: 'Address', variable_name: 'address', value: address + ', ' + city + ', ' + state }
+            ]
           },
-          items: cart.map(i => ({
-            id: i.id,
-            name: i.name,
-            qty: i.qty,
-            price: i.price
-          })),
-          subtotal: subtotal,
-          total: subtotal - discount,
-          status: 'pending'
-        });
+          callback: function(response) {
+            // Payment successful — save order to Firebase
+            const orderNum = response.reference;
+            window.saveOrder({
+              orderNumber: orderNum,
+              customer: {
+                name: fname + ' ' + lname,
+                email: email,
+                phone: phone,
+                address: address + ', ' + city + ', ' + state
+              },
+              items: cart.map(i => ({
+                id: i.id,
+                name: i.name,
+                qty: i.qty,
+                price: i.price
+              })),
+              subtotal: subtotal,
+              total: total,
+              paystackReference: response.reference,
+              status: 'paid'
+            });
 
-        document.getElementById('order-num').textContent = `Order #${orderNum}`;
-        document.getElementById('checkout-form-area').style.display = 'none';
-        document.getElementById('order-success').classList.add('show');
+            // Show success
+            document.getElementById('order-num').textContent = `Order #${orderNum}`;
+            document.getElementById('checkout-form-area').style.display = 'none';
+            document.getElementById('order-success').classList.add('show');
+            document.getElementById('modal-overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            resetCart();
+          },
+          onClose: function() {
+            showToast('Payment cancelled. Your cart is still saved.');
+          }
+        });
+        handler.openIframe();
+        return;
+
+        
         return;
       }
       updateCoSteps();
