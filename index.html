@@ -1134,7 +1134,37 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
         coStep = 3;
       } else if (coStep === 3) {
         // Place order
-        const orderNum = 'AUR-' + Math.floor(100000 + Math.random() * 900000);
+       const orderNum = 'AUR-' + Math.floor(100000 + Math.random() * 900000);
+
+        // Save order to Firebase
+        const fname = document.getElementById('co-fname').value.trim();
+        const lname = document.getElementById('co-lname').value.trim();
+        const email = document.getElementById('co-email').value.trim();
+        const phone = document.getElementById('co-phone').value.trim();
+        const address = document.getElementById('co-address').value.trim();
+        const city = document.getElementById('co-city').value.trim();
+        const state = document.getElementById('co-state').value.trim();
+        const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+        window.saveOrder({
+          orderNumber: orderNum,
+          customer: {
+            name: fname + ' ' + lname,
+            email: email,
+            phone: phone,
+            address: address + ', ' + city + ', ' + state
+          },
+          items: cart.map(i => ({
+            id: i.id,
+            name: i.name,
+            qty: i.qty,
+            price: i.price
+          })),
+          subtotal: subtotal,
+          total: subtotal - discount,
+          status: 'pending'
+        });
+
         document.getElementById('order-num').textContent = `Order #${orderNum}`;
         document.getElementById('checkout-form-area').style.display = 'none';
         document.getElementById('order-success').classList.add('show');
@@ -1204,6 +1234,36 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
     // ── INIT ───────────────────────────────────────────────────────
     renderProducts();
     updateCartUI();
+  </script>
+<!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBhyjR0-JThLCRoZHtPEPZpSWKCRNIcpcg",
+      authDomain: "aura-beauty-store.firebaseapp.com",
+      projectId: "aura-beauty-store",
+      storageBucket: "aura-beauty-store.firebasestorage.app",
+      messagingSenderId: "734103505852",
+      appId: "1:734103505852:web:cdae253c776ab26547b9b9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Save order to Firestore
+    window.saveOrder = async function(data) {
+      try {
+        await addDoc(collection(db, "orders"), {
+          ...data,
+          createdAt: serverTimestamp()
+        });
+        console.log("Order saved successfully!");
+      } catch (error) {
+        console.error("Error saving order:", error);
+      }
+    }
   </script>
 </body>
 </html>
