@@ -639,6 +639,7 @@
       display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr 1.8fr;
       gap: 3rem; padding: 5rem 2.5rem 4rem;
       border-bottom: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
     }
     .footer-brand .nav-logo {
       font-family: 'Cormorant Garamond', serif;
@@ -728,17 +729,36 @@
       .hero-right { 
         display: flex; 
         min-height: 280px;
-        overflow: hidden;
-        .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 1.5rem 2rem; }
-      .footer-brand { grid-column: 1/-1; }
-      .footer-newsletter { grid-column: 1/-1; }
-      .footer-bottom { flex-direction: column; text-align: center; padding: 1.2rem 1.5rem; }
-      }
-      .hero-blob {
+        overflow: hidden;  }   
+       .hero-blob {
         width: 220px;
         height: 240px;
-        font-size: 5rem;
+        font-size: 5rem; }
+      footer { overflow: hidden; width: 100%; }
+      .footer-top { 
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding: 2.5rem 1.5rem !important;
+        width: 100% !important;
+        overflow: hidden !important;
       }
+      .footer-brand, .footer-col, .footer-newsletter {
+        width: 100% !important;
+        max-width: 100% !important;
+        grid-column: unset !important;
+      }
+      .footer-brand p { max-width: 100% !important; }
+      .newsletter-form { width: 100% !important; }
+      .newsletter-form input { width: 100% !important; min-width: 0 !important; flex: 1 !important; }
+      .footer-bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 1.2rem 1.5rem !important;
+        gap: 0.5rem !important;
+        width: 100% !important;
+      }
+      .footer-bottom-links { justify-content: center !important; }
       .hero-badge {
         bottom: 1rem;
         left: 1rem;
