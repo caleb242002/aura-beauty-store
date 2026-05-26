@@ -607,6 +607,120 @@
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+    /* USER MENU */
+    .user-menu { position: relative; }
+    .user-dropdown {
+      position: absolute; top: 120%; right: 0;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem;
+      min-width: 200px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      display: none; z-index: 200;
+    }
+    .user-dropdown.open { display: block; animation: fadeUp 0.2s ease; }
+    .user-name { font-weight: 700; font-size: 0.88rem; color: var(--ink); }
+    .user-email { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; margin-bottom: 0.5rem; }
+    .user-dropdown button {
+      width: 100%; background: var(--stone); border: none;
+      padding: 0.6rem 1rem; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+      font-weight: 600; color: var(--ink); cursor: pointer;
+      transition: background 0.2s; text-align: left;
+    }
+    .user-dropdown button:hover { background: var(--blush); }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.7);
+      margin-top: auto;
+    }
+    .footer-top {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr 1.8fr;
+      gap: 3rem; padding: 5rem 2.5rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300;
+      letter-spacing: 0.25em; color: var(--white);
+      text-transform: uppercase; display: block; margin-bottom: 1rem;
+    }
+    .footer-brand p {
+      font-size: 0.85rem; line-height: 1.75;
+      color: rgba(255,255,255,0.45); max-width: 240px; margin-bottom: 1.5rem;
+    }
+    .footer-socials { display: flex; gap: 0.6rem; }
+    .footer-social {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.4);
+      text-decoration: none; text-transform: lowercase;
+      transition: all 0.2s;
+    }
+    .footer-social:hover { border-color: var(--clay); color: var(--clay); }
+
+    .footer-col h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--white); margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col ul a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.4);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--clay); }
+
+    .footer-newsletter p {
+      font-size: 0.82rem; line-height: 1.7;
+      color: rgba(255,255,255,0.45); margin-bottom: 1rem;
+    }
+    .newsletter-form {
+      display: flex; margin-bottom: 0.6rem;
+    }
+    .newsletter-form input {
+      flex: 1; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-right: none; padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      color: var(--white); outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.25); }
+    .newsletter-form input:focus { border-color: var(--clay); }
+    .newsletter-form button {
+      background: var(--clay); color: var(--white);
+      border: none; padding: 0.75rem 1.2rem;
+      font-size: 1rem; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--bark); }
+    .newsletter-note { font-size: 0.7rem; color: rgba(255,255,255,0.25); margin-bottom: 1.5rem; }
+
+    .footer-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .badge {
+      font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-bottom {
+      max-width: 1300px; margin: 0 auto;
+      padding: 1.5rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a {
+      font-size: 0.72rem; color: rgba(255,255,255,0.2);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-bottom-links a:hover { color: var(--clay); }
+
     /* RESPONSIVE */
     @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 860px) {
@@ -615,6 +729,10 @@
         display: flex; 
         min-height: 280px;
         overflow: hidden;
+        .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 1.5rem 2rem; }
+      .footer-brand { grid-column: 1/-1; }
+      .footer-newsletter { grid-column: 1/-1; }
+      .footer-bottom { flex-direction: column; text-align: center; padding: 1.2rem 1.5rem; }
       }
       .hero-blob {
         width: 220px;
@@ -633,6 +751,9 @@
       .field-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; } }
+  
+ 
+
   </style>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
@@ -653,7 +774,9 @@
       <a href="#" class="nav-logo">Aura</a>
       <div class="nav-right">
         <button class="nav-icon" onclick="toggleSearch()" title="Search">🔍</button>
-        <button class="nav-icon" title="Account">👤</button>
+        <div id="nav-account">
+          <button class="nav-icon" onclick="openAuthModal()" title="Account">👤</button>
+        </div>
         <button class="nav-icon" onclick="openCart()" title="Cart">
           🛒
           <span class="cart-count" id="cart-count">0</span>
@@ -843,8 +966,149 @@
     </div>
   </div>
 
+ <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="auth-overlay">
+    <div class="modal" style="max-width:420px">
+      <div class="modal-header">
+        <h3 id="auth-title">Sign In to AURA</h3>
+        <button class="modal-close" onclick="closeAuthModal()">✕</button>
+      </div>
+      <div class="modal-body" style="padding:2rem">
+
+        <!-- Google button -->
+        <button onclick="handleGoogleSignIn()" style="
+          width:100%; padding:0.9rem; border-radius:50px;
+          border:1.5px solid var(--border); background:var(--cream);
+          font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600;
+          cursor:pointer; display:flex; align-items:center; justify-content:center;
+          gap:0.6rem; transition:border-color 0.2s; margin-bottom:1.2rem;">
+          <img src="https://www.google.com/favicon.ico" style="width:16px;height:16px"/>
+          Continue with Google
+        </button>
+
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem">
+          <div style="flex:1;height:1px;background:var(--border)"></div>
+          <span style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">or</span>
+          <div style="flex:1;height:1px;background:var(--border)"></div>
+        </div>
+
+        <!-- Name field (signup only) -->
+        <div id="auth-name-field" style="display:none;margin-bottom:1rem">
+          <label style="font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.4rem">Full Name</label>
+          <input type="text" id="auth-name" placeholder="Ada Okonkwo" style="
+            width:100%;background:var(--cream);border:1px solid var(--border);
+            padding:0.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;
+            color:var(--ink);outline:none;border-radius:8px;"/>
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label style="font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.4rem">Email Address</label>
+          <input type="email" id="auth-email" placeholder="ada@example.com" style="
+            width:100%;background:var(--cream);border:1px solid var(--border);
+            padding:0.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;
+            color:var(--ink);outline:none;border-radius:8px;"/>
+        </div>
+
+        <div style="margin-bottom:1.5rem">
+          <label style="font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.4rem">Password</label>
+          <input type="password" id="auth-password" placeholder="Min. 6 characters" style="
+            width:100%;background:var(--cream);border:1px solid var(--border);
+            padding:0.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;
+            color:var(--ink);outline:none;border-radius:8px;"/>
+        </div>
+
+        <button id="auth-submit-btn" onclick="handleSignIn()" style="
+          width:100%;background:var(--ink);color:var(--cream);
+          padding:1rem;border-radius:50px;border:none;
+          font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;
+          cursor:pointer;margin-bottom:1rem;transition:background 0.2s;">
+          Sign In
+        </button>
+
+        <p style="text-align:center;font-size:0.82rem;color:var(--muted)">
+          <span id="auth-toggle-text">Don't have an account?</span>
+          <a href="#" onclick="toggleAuthMode(); return false;" 
+            style="color:var(--bark);font-weight:600;text-decoration:none" 
+            id="auth-toggle-link"> Sign Up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
+
+ <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="text-decoration:none">Aura</a>
+        <p>Clean, conscious beauty formulated with the finest botanical ingredients. No compromise — for your skin or the planet.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">ig</a>
+          <a href="#" class="footer-social">tw</a>
+          <a href="#" class="footer-social">tk</a>
+          <a href="#" class="footer-social">fb</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Cleansers</a></li>
+          <li><a href="#">Serums</a></li>
+          <li><a href="#">Moisturisers</a></li>
+          <li><a href="#">Facial Oils</a></li>
+          <li><a href="#">SPF & Sun Care</a></li>
+          <li><a href="#">Face Masks</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Ingredients</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h4>Stay in the Loop</h4>
+        <p>Get 10% off your first order plus skincare tips, new arrivals and exclusive offers.</p>
+        <div class="newsletter-form">
+          <input type="email" id="newsletter-email" placeholder="Your email address"/>
+          <button onclick="subscribeNewsletter()">→</button>
+        </div>
+        <p class="newsletter-note">🔒 No spam. Unsubscribe anytime.</p>
+        <div class="footer-badges">
+          <span class="badge">✓ Cruelty Free</span>
+          <span class="badge">✓ Vegan</span>
+          <span class="badge">✓ Clean Ingredients</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aura Beauty. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+      <p>Made with 🤍 for clean beauty lovers</p>
+    </div>
+  </footer>
 
   
 
@@ -1265,6 +1529,50 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
     }
 
     // ── INIT ───────────────────────────────────────────────────────
+   // Auth modal
+    function openAuthModal() {
+      document.getElementById('auth-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeAuthModal() {
+      document.getElementById('auth-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    let isSignUp = false;
+    function toggleAuthMode() {
+      isSignUp = !isSignUp;
+      document.getElementById('auth-title').textContent = isSignUp ? 'Create an Account' : 'Sign In to AURA';
+      document.getElementById('auth-name-field').style.display = isSignUp ? 'block' : 'none';
+      document.getElementById('auth-submit-btn').textContent = isSignUp ? 'Create Account' : 'Sign In';
+      document.getElementById('auth-submit-btn').onclick = isSignUp ? handleSignUp : handleSignIn;
+      document.getElementById('auth-toggle-text').textContent = isSignUp ? 'Already have an account?' : "Don't have an account?";
+      document.getElementById('auth-toggle-link').textContent = isSignUp ? ' Sign In' : ' Sign Up';
+    }
+
+    function toggleUserMenu() {
+      document.getElementById('user-dropdown').classList.toggle('open');
+    }
+
+    // Close user dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('user-menu');
+      if (menu && !menu.contains(e.target)) {
+        const dropdown = document.getElementById('user-dropdown');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+  function subscribeNewsletter() {
+      const email = document.getElementById('newsletter-email').value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast('Please enter a valid email address.');
+        return;
+      }
+      document.getElementById('newsletter-email').value = '';
+      showToast('Welcome to AURA! 10% off code sent to ' + email + ' ✦');
+    }
+
     renderProducts();
     updateCartUI();
   </script>
@@ -1272,7 +1580,7 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     const firebaseConfig = {
       apiKey: "AIzaSyBhyjR0-JThLCRoZHtPEPZpSWKCRNIcpcg",
       authDomain: "aura-beauty-store.firebaseapp.com",
@@ -1284,6 +1592,87 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Track auth state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        document.getElementById('nav-account').innerHTML = `
+          <div class="user-menu" id="user-menu">
+            <button class="nav-icon" onclick="toggleUserMenu()" title="Account">
+              <img src="${user.photoURL || ''}" 
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                style="width:28px;height:28px;border-radius:50%;object-fit:cover"/>
+              <span style="display:none;width:28px;height:28px;border-radius:50%;background:var(--bark);color:var(--cream);font-size:0.75rem;font-weight:700;align-items:center;justify-content:center;">
+                ${user.displayName ? user.displayName[0].toUpperCase() : user.email[0].toUpperCase()}
+              </span>
+            </button>
+            <div class="user-dropdown" id="user-dropdown">
+              <p class="user-name">${user.displayName || 'Welcome!'}</p>
+              <p class="user-email">${user.email}</p>
+              <hr style="border:none;border-top:1px solid var(--border);margin:0.5rem 0"/>
+              <button onclick="handleSignOut()">Sign Out</button>
+            </div>
+          </div>`;
+      } else {
+        // User is signed out
+        document.getElementById('nav-account').innerHTML = `
+          <button class="nav-icon" onclick="openAuthModal()" title="Account">👤</button>`;
+      }
+    });
+
+    // Sign up with email
+    window.handleSignUp = async function() {
+      const email = document.getElementById('auth-email').value.trim();
+      const password = document.getElementById('auth-password').value;
+      const name = document.getElementById('auth-name').value.trim();
+      if (!email || !password || !name) { showToast('Please fill in all fields.'); return; }
+      try {
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        showToast('Account created! Welcome to AURA ✦');
+        closeAuthModal();
+      } catch (error) {
+        showToast(error.message.replace('Firebase: ', ''));
+      }
+    }
+
+    // Sign in with email
+    window.handleSignIn = async function() {
+      const email = document.getElementById('auth-email').value.trim();
+      const password = document.getElementById('auth-password').value;
+      if (!email || !password) { showToast('Please fill in all fields.'); return; }
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showToast('Welcome back! ✦');
+        closeAuthModal();
+      } catch (error) {
+        showToast('Invalid email or password. Please try again.');
+      }
+    }
+
+    // Sign in with Google
+    window.handleGoogleSignIn = async function() {
+      try {
+        await signInWithPopup(auth, provider);
+        showToast('Welcome to AURA ✦');
+        closeAuthModal();
+      } catch (error) {
+        showToast('Google sign-in failed. Please try again.');
+      }
+    }
+
+    // Sign out
+    window.handleSignOut = async function() {
+      try {
+        await signOut(auth);
+        showToast('Signed out successfully.');
+        document.getElementById('user-dropdown').style.display = 'none';
+      } catch (error) {
+        showToast('Error signing out.');
+      }
+    }
 
     // Save order to Firestore
     window.saveOrder = async function(data) {
