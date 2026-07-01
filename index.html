@@ -66,12 +66,14 @@
       color: var(--ink); text-decoration: none; text-transform: uppercase;
     }
 
-    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
-    .nav-icon {
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+   .nav-icon {
       background: none; border: none; cursor: pointer;
-      color: var(--muted); font-size: 1rem;
+      color: var(--ink); font-size: 1rem;
       transition: color 0.2s; position: relative;
+      filter: grayscale(1);
     }
+    .nav-icon:hover { color: var(--clay); filter: grayscale(0.3); }
     .nav-icon:hover { color: var(--ink); }
 
     .cart-count {
@@ -87,13 +89,30 @@
 
     /* HERO */
     .hero {
-      max-width: 1300px; margin: 0 auto;
+      max-width: 100%; 
       display: grid; grid-template-columns: 1fr 1fr;
       min-height: 580px; overflow: hidden;
+      position: relative;
+      background-image: url('kaeme-WrZutKjrI2U-unsplash.jpg');
+      background-size: cover;
+      background-position: center;
     }
-    .hero-left {
+ .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(255,255,255,0.82) 0%,
+        rgba(255,255,255,0.65) 40%,
+        rgba(255,255,255,0.25) 70%,
+        rgba(255,255,255,0.05) 100%
+      );
+      z-index: 0;
+    }
+   .hero-left {
       padding: 5rem 3rem 5rem 2.5rem;
       display: flex; flex-direction: column; justify-content: center;
+      position: relative; z-index: 1;
     }
     .hero-eyebrow {
       font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
@@ -110,14 +129,16 @@
       color: var(--ink); margin-bottom: 1.5rem;
     }
     .hero-title em { font-style: italic; color: var(--bark); }
-    .hero-desc {
-      font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+.hero-desc {
+      font-size: 0.95rem; line-height: 1.8; color: var(--ink);
       max-width: 380px; margin-bottom: 2.5rem;
+      text-shadow: 0 1px 12px rgba(255,255,255,0.8), 0 1px 2px rgba(255,255,255,0.9);
     }
     .hero-actions { display: flex; gap: 1rem; align-items: center; }
     .btn-ink {
       background: var(--ink); color: var(--cream);
       padding: 0.9rem 2.2rem;
+      border-radius: 50px;
       font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
       border: none; cursor: pointer; text-decoration: none; display: inline-block;
       transition: background 0.2s, transform 0.2s;
@@ -126,16 +147,17 @@
     .btn-outline {
       background: transparent; color: var(--ink);
       padding: 0.9rem 2rem;
+      border-radius: 50px;
       font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
       border: 1px solid var(--border); cursor: pointer; text-decoration: none; display: inline-block;
       transition: border-color 0.2s, color 0.2s;
     }
     .btn-outline:hover { border-color: var(--ink); }
 
-    .hero-right {
-      background: var(--stone);
+  .hero-right {
       position: relative; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
+      z-index: 1;
     }
     .hero-blob {
       width: 340px; height: 380px;
@@ -152,10 +174,17 @@
       0%, 100% { transform: translateY(0) rotate(0deg); border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; }
       50% { transform: translateY(-16px) rotate(2deg); border-radius: 45% 55% 40% 60% / 60% 45% 55% 40%; }
     }
-    .hero-badge {
-      position: absolute; bottom: 2.5rem; left: 2.5rem;
-      background: var(--white); padding: 1rem 1.5rem;
+   .hero-badge {
+      position: absolute; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(12px);
+      padding: 1rem 1.5rem;
       border-left: 3px solid var(--clay);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      text-align: center;
+      white-space: nowrap;
     }
     .hero-badge strong {
       display: block; font-family: 'Cormorant Garamond', serif;
@@ -164,9 +193,9 @@
     .hero-badge span { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 
     /* TICKER */
-    .ticker {
+   .ticker {
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      overflow: hidden; white-space: nowrap; padding: 0.8rem 0;
+      overflow: hidden; white-space: nowrap; padding: 1.1rem 0;
       background: var(--white);
     }
     .ticker-inner {
@@ -175,7 +204,7 @@
       font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--muted);
     }
-    .ticker-item { padding: 0 2.5rem; }
+    .ticker-item { padding: 0 3.5rem; }
     .ticker-item::after { content: ' · '; color: var(--clay); }
     @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -196,11 +225,12 @@
     .shop-header h2 em { font-style: italic; }
 
     /* Filters */
-    .filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .filters { display: flex; gap: 0.75rem; flex-wrap: wrap; }
     .filter-btn {
       background: transparent; border: 1px solid var(--border);
-      padding: 0.5rem 1.2rem;
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.75rem 1.6rem;
+      border-radius: 50px;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--muted); cursor: pointer;
       transition: all 0.2s;
     }
@@ -229,19 +259,27 @@
       gap: 2rem;
     }
 
-    .product-card {
+   .product-card {
       cursor: pointer;
       position: relative;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .product-card:hover .product-img-wrap img {
-      transform: scale(1.04);
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
     }
+    .product-card:hover .img-primary { opacity: 0 !important; }
+    .product-card:hover .img-hover { opacity: 1 !important; }
     .product-card:hover .card-actions { opacity: 1; transform: translateY(0); }
 
-    .product-img-wrap {
+   .product-img-wrap {
       background: var(--stone);
       aspect-ratio: 3/4; overflow: hidden;
-      position: relative; margin-bottom: 1rem;
+      position: relative; margin-bottom: 0;
     }
     .product-img-wrap img {
       width: 100%; height: 100%; object-fit: cover;
@@ -292,7 +330,7 @@
     .wishlist-btn:hover { transform: scale(1.1); }
     .wishlist-btn.active { color: var(--rose); }
 
-    .product-info { padding: 0 0.2rem; }
+    .product-info { padding: 1rem; }
     .product-brand {
       font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--clay); margin-bottom: 0.3rem;
@@ -722,18 +760,82 @@
     }
     .footer-bottom-links a:hover { color: var(--clay); }
 
+/* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 4px; z-index: 201;
+      margin-left: 0.5rem;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--ink); border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 113px; left: 0; right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      z-index: 199;
+      padding: 0.5rem 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      animation: slideDown 0.3s ease;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; }
+    .mobile-menu ul li a {
+      display: block; padding: 0.9rem 2rem;
+      font-size: 0.95rem; font-weight: 500;
+      color: var(--ink); text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .mobile-menu ul li:last-child a { border-bottom: none; }
+    .mobile-menu ul li a:hover { color: var(--clay); background: var(--stone); }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { 
-        display: flex; 
-        min-height: 280px;
-        overflow: hidden;  }   
-       .hero-blob {
-        width: 220px;
-        height: 240px;
-        font-size: 5rem; }
+.hero {
+          display: block !important;
+          max-width: 100% !important;
+          min-height: 650px !important;
+          background-position: top center !important;
+          background-size: cover !important;
+        }
+        .hero-left {
+          width: 100% !important;
+          min-height: 650px !important;
+          padding: 3rem 1.5rem !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
+          position: relative !important;
+          z-index: 1 !important;
+        }
+        .hero-right { display: none !important; }
+              .hero::before {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.85) 0%,
+          rgba(255,255,255,0.75) 50%,
+          rgba(255,255,255,0.4) 100%
+        ) !important;
+      }
+      
       footer { overflow: hidden; width: 100%; }
       .footer-top { 
         display: flex !important;
@@ -765,6 +867,7 @@
       }
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
       .nav-left { display: none; }
+      .hamburger { display: flex; }
       .shop { padding: 3rem 1.5rem; }
       .shop-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
       .cart-sidebar { width: 100vw; }
@@ -785,25 +888,37 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
+      <a href="#" class="nav-logo">Aura</a>
       <ul class="nav-left">
         <li><a href="#">Skincare</a></li>
         <li><a href="#">Body</a></li>
         <li><a href="#">Wellness</a></li>
         <li><a href="#">Gifts</a></li>
       </ul>
-      <a href="#" class="nav-logo">Aura</a>
+      
       <div class="nav-right">
-        <button class="nav-icon" onclick="toggleSearch()" title="Search">🔍</button>
-        <div id="nav-account">
-          <button class="nav-icon" onclick="openAuthModal()" title="Account">👤</button>
-        </div>
-        <button class="nav-icon" onclick="openCart()" title="Cart">
-          🛒
-          <span class="cart-count" id="cart-count">0</span>
+          <button class="nav-icon" onclick="toggleSearch()" title="Search">🔍</button>
+          <div id="nav-account">
+            <button class="nav-icon" onclick="openAuthModal()" title="Account">👤</button>
+          </div>
+          <button class="nav-icon" onclick="openCart()" title="Cart">
+            🛒
+            <span class="cart-count" id="cart-count">0</span>
+          </button>
+          <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
         </button>
       </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul>
+        <li><a href="#" onclick="closeMenu()">Skincare</a></li>
+        <li><a href="#" onclick="closeMenu()">Body</a></li>
+        <li><a href="#" onclick="closeMenu()">Wellness</a></li>
+        <li><a href="#" onclick="closeMenu()">Gifts</a></li>
+        <li><a href="#shop" onclick="closeMenu()">Shop Now</a></li>
+      </ul>
     </div>
-  </nav>
 
   <!-- HERO -->
   <section>
@@ -1135,18 +1250,18 @@
   <script>
     // ── PRODUCTS DATA ──────────────────────────────────────────────
     const products = [
-      { id:1,  name:'Gentle Foam Cleanser',        brand:'Aura',     category:'cleanser',    price:12500, size:'150ml', emoji:'🫧', badge:'bestseller', stars:5,   rating:4.8, image:"./curology-wK0h-mlvfuc-unsplash.jpg" },
-      { id:2,  name:'Vitamin C Brightening Serum', brand:'Aura',     category:'serum',       price:28000, size:'30ml',  emoji:'✨', badge:'new',        stars:5,   rating:4.9, image: "./enecta-cannabis-extracts-80wCkpt-IKE-unsplash.jpg"},
-      { id:3,  name:'Hydra-Barrier Moisturiser',   brand:'Aura',     category:'moisturiser', price:22000, size:'50ml',  emoji:'💧', badge:null,         stars:4,   rating:4.6, image: "./kalos-skincare-kzjH8CCWAD0-unsplash.jpg"},
-      { id:4,  name:'Rose Hip Facial Oil',         brand:'Aura',     category:'oil',         price:18500, size:'30ml',  emoji:'🌹', badge:'bestseller', stars:5,   rating:4.7, image: "./laura-jaeger-eKxQCPw3dyc-unsplash.jpg"},
-      { id:5,  name:'Kaolin Clay Purifying Mask',  brand:'Aura',     category:'mask',        price:15000, size:'75ml',  emoji:'🪔', badge:null,         stars:4,   rating:4.5, image: "./valeriia-miller-_42NKYROG7g-unsplash.jpg"},
-      { id:6,  name:'Mineral SPF 50 Sunscreen',    brand:'Aura',     category:'spf',         price:16500, size:'60ml',  emoji:'☀️', badge:'new',        stars:5,   rating:4.9, image: "./blobimg1.jpg"},
-      { id:7,  name:'Niacinamide 10% Serum',       brand:'Aura',     category:'serum',       price:24000, size:'30ml',  emoji:'⚗️', badge:null,         stars:4,   rating:4.6, image: "./rafly-alfaridzy-D44p6Ubx-9E-unsplash.jpg"},
-      { id:8,  name:'Ceramide Repair Moisturiser', brand:'Aura',     category:'moisturiser', price:26500, originalPrice:32000, size:'50ml', emoji:'🌿', badge:'sale', stars:5, rating:4.8, image: "./globencer-DiJKOYIiNmQ-unsplash.jpg"},
-      { id:9,  name:'Oil Balancing Toner',         brand:'Aura',     category:'cleanser',    price:13500, size:'200ml', emoji:'💎', badge:null,         stars:4,   rating:4.4, image: "./laura-jaeger-_dSHqe4mcWE-unsplash.jpg"},
-      { id:10, name:'Bakuchiol Retinol Serum',     brand:'Aura',     category:'serum',       price:31000, size:'30ml',  emoji:'🌙', badge:'new',        stars:5,   rating:4.9, image: "./marisa-garrido-8cN2BYlzuyI-unsplash.jpg"},
-      { id:11, name:'Avocado Nourishing Mask',     brand:'Aura',     category:'mask',        price:14000, size:'75ml',  emoji:'🥑', badge:null,         stars:4,   rating:4.3, image: "./birgith-roosipuu-4uN0JxJGRQE-unsplash.jpg"},
-      { id:12, name:'Squalane Face Oil',           brand:'Aura',     category:'oil',         price:19500, size:'30ml',  emoji:'🫙', badge:'bestseller', stars:5,   rating:4.7, image: "./janay-peters-TYwZ5tgKjYQ-unsplash.jpg"},
+      { id:1,  name:'Gentle Foam Cleanser',        brand:'Aura',     category:'cleanser',    price:12500, size:'150ml', emoji:'🫧', badge:'bestseller', stars:5,   rating:4.8, image:"./curology-wK0h-mlvfuc-unsplash.jpg", image2:"./lumin-BI7EeFaNJ1Q-unsplash.jpg" },
+      { id:2,  name:'Vitamin C Brightening Serum', brand:'Aura',     category:'serum',       price:28000, size:'30ml',  emoji:'✨', badge:'new',        stars:5,   rating:4.9, image: "./marisa-garrido-8cN2BYlzuyI-unsplash.jpg", image2:"./enecta-cannabis-extracts-80wCkpt-IKE-unsplash.jpg" },
+      { id:3,  name:'Hydra-Barrier Moisturiser',   brand:'Aura',     category:'moisturiser', price:22000, size:'50ml',  emoji:'💧', badge:null,         stars:4,   rating:4.6, image: "./liubov-ilchuk-x_ujfGcrAyU-unsplash.jpg", image2:"./kalos-skincare-kzjH8CCWAD0-unsplash.jpg" },
+      { id:4,  name:'Rose Hip Facial Oil',         brand:'Aura',     category:'oil',         price:18500, size:'30ml',  emoji:'🌹', badge:'bestseller', stars:5,   rating:4.7, image: "./laura-jaeger-eKxQCPw3dyc-unsplash.jpg", image2:"./laura-jaeger.jpg" },
+      { id:5,  name:'Kaolin Clay Purifying Mask',  brand:'Aura',     category:'mask',        price:15000, size:'75ml',  emoji:'🪔', badge:null,         stars:4,   rating:4.5, image: "./valeriia-miller-_42NKYROG7g-unsplash.jpg", image2:"./xandro-vandewalle-CxmQXVqzyIE-unsplash.jpg" },
+      { id:6,  name:'Mineral SPF 50 Sunscreen',    brand:'Aura',     category:'spf',         price:16500, size:'60ml',  emoji:'☀️', badge:'new',        stars:5,   rating:4.9, image: "./tuan-nguyen-Um_u0YnV7nQ-unsplash.jpg", image2:"./cheyenne-doig-dPs0DEGrM9A-unsplash.jpg" },
+      { id:7,  name:'Niacinamide 10% Serum',       brand:'Aura',     category:'serum',       price:24000, size:'30ml',  emoji:'⚗️', badge:null,         stars:4,   rating:4.6, image: "./rafly-alfaridzy-D44p6Ubx-9E-unsplash.jpg", image2:"./amplitude-magazin-8BMr4l_2hgY-unsplash.jpg" },
+      { id:8,  name:'Ceramide Repair Moisturiser', brand:'Aura',     category:'moisturiser', price:26500, originalPrice:32000, size:'50ml', emoji:'🌿', badge:'sale', stars:5, rating:4.8, image: "./giulia-perera-WDKBiAeI3iU-unsplash.jpg", image2:"./kalos-skincare-jyKa0Ynxvow-unsplash.jpg" },
+      { id:9,  name:'Oil Balancing Toner',         brand:'Aura',     category:'cleanser',    price:13500, size:'200ml', emoji:'💎', badge:null,         stars:4,   rating:4.4, image: "./janay-peters-TYwZ5tgKjYQ-unsplash.jpg", image2:"./plantadea-NA5nnaw2A_o-unsplash.jpg" },
+      { id:10, name:'Bakuchiol Retinol Serum',     brand:'Aura',     category:'serum',       price:31000, size:'30ml',  emoji:'🌙', badge:'new',        stars:5,   rating:4.9, image: "./isaac-wolff-hFc2dPjoyM4-unsplash.jpg", image2:"./christian-agbede-Vpcy3ytvQVw-unsplash.jpg" },
+      { id:11, name:'Avocado Nourishing Mask',     brand:'Aura',     category:'mask',        price:14000, size:'75ml',  emoji:'🥑', badge:null,         stars:4,   rating:4.3, image: "./birgith-roosipuu-4uN0JxJGRQE-unsplash.jpg", image2:"./leighann-blackwood.jpg" },
+      { id:12, name:'Squalane Face Oil',           brand:'Aura',     category:'oil',         price:19500, size:'30ml',  emoji:'🫙', badge:'bestseller', stars:5,   rating:4.7, image: "./laura-jaeger-_dSHqe4mcWE-unsplash.jpg", image2:"./laura-jaeger-PluXo0iRI-8-unsplash.jpg" },
     ];
 
     let cart = JSON.parse(localStorage.getItem('aura-cart') || '[]');
@@ -1187,8 +1302,11 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
         return `
           <div class="product-card" data-id="${p.id}">
             <div class="product-img-wrap">
-              ${p.image ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="img-placeholder" style="display:none">${p.emoji}</div>` : `<div class="img-placeholder">${p.emoji}</div>`}
-              ${badgeHTML}
+              ${p.image ? `
+              <img class="img-primary" src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:opacity 0.5s ease;opacity:1;" onerror="this.style.display='none'"/>
+              ${p.image2 ? `<img class="img-hover" src="${p.image2}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:opacity 0.5s ease;opacity:0;"/>` : ''}
+            ` : `<div class="img-placeholder">${p.emoji}</div>`}              
+            ${badgeHTML}
               <button class="wishlist-btn ${wishlisted ? 'active' : ''}" onclick="toggleWishlist(${p.id}, this)" title="Wishlist">
                 ${wishlisted ? '❤️' : '🤍'}
               </button>
@@ -1592,6 +1710,27 @@ if (searchQuery) list = list.filter(p => p.name.toLowerCase().includes(searchQue
       document.getElementById('newsletter-email').value = '';
       showToast('Welcome to AURA! 10% off code sent to ' + email + ' ✦');
     }
+
+// Hamburger menu
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('hamburger');
+      if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+      }
+    });
 
     renderProducts();
     updateCartUI();
